@@ -14,6 +14,9 @@ The game continues till one of the sides has no more battleships.
 
 
 ## :framed_picture:	Screenshots
+![Battleships-Game - sc1](https://user-images.githubusercontent.com/61319079/182020370-2d13ad9b-c8a2-4180-b11b-d65007d05ab9.png)
+![Battleships-Game - sc2](https://user-images.githubusercontent.com/61319079/182020386-132d05e1-bc57-474c-906f-aea37c8726cd.png)
+
 
 ## :man_technologist:	Authors
 
