@@ -1,6 +1,6 @@
- /**
+hc /**
  * AIComputerPlayer class is object that responsible the computer game:
- * Manager of the round games and choose whice cell to shoot by AI.
+ * Manager of the round games and choose whice cell to shoot.
  * 
  *  @param b: The board for player
  *  @type b: class Board
@@ -10,11 +10,11 @@ import java.util.*;
 
 public class AIComputerPlayer { 
     private Board rivalBoard; //rival Board
-    private Vector<int []> vector_shootPoint;//includ all possible shoot points(creat by func createShootPointBySizeBat() ).
-    private int spacePointVector;// indicative the skipes between points that add to vector_shootPoint(It also means looking for a size battleship)
+    private Vector<int []> vector_shootPoint;//includes all possible shoot points(create by func createShootPointBySizeBat() ).
+    private int spacePointVector;// indicative the skips between points that add to vector_shootPoint(It also means looking for a size battleship)
     private int[] lastPointShoot;// save what was the last shoot point 
     private boolean middle_attack;//Flag to know if the computer is currently detecting a submarine and trying to destroy it.
-    private int[] firstHitPointAttack;// save the first hit point at new attak (when middle_attack become true).
+    private int[] firstHitPointAttack;// save the first hit point at new attack (when middle_attack become true).
     private int row_board;// row board
     private int col_board;// col board
     
@@ -44,16 +44,16 @@ public class AIComputerPlayer {
         return lastPointShoot;
     }
     public int[] yourRound()
-    // this function called from GAME class, it gives the comuter indication that now his turn and choose-return point to shoot.
+    // this function called from GAME class, it gives the comuter indication that now PC's turn and choose-return point to shoot.
     { 
-        if (spacePointVector==1) // in this stage there only possible battleships in size 1 so the algorithem automaticly randomes points for attack.
+        if (spacePointVector==1) // in this stage there only possible battleships in size 1 so the algorithem automaticly randoms points for attack.
         {
             return  getRandomPoint();
         }
         
         char charSquareLastShoot = rivalBoard.getSquare(lastPointShoot[0], lastPointShoot[1]);
         if(charSquareLastShoot == Constants.HIT)
-        {//When the previous hit the submarine
+        {//When the previous hit damaged the submarine
             if(middle_attack==false)// When first hitting a new bat
             {
                 firstHitPointAttack = lastPointShoot; // save the first hit point for later (to know where to go in case of miss)
@@ -121,7 +121,7 @@ public class AIComputerPlayer {
                 if (row + 1 <= rivalBoard.getLengthRow()-1) // it will go down just if the board size allows him.
                 {
                     charSquare = rivalBoard.getSquare(row+1,col) ; // takes the sign in the particular square for check.
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     { 
                         // if the board size and the square sign allows so this point will be randomised for next hit.
                         nextPoint[0] = row + 1; // for row.
@@ -136,7 +136,7 @@ public class AIComputerPlayer {
                 if (row - 1 >= lowBorder + 1)  // it will go up just if the board size allows him.
                 {
                     charSquare = rivalBoard.getSquare(row-1,col) ; // takes the sign in the particular square for check.
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     {
                         // if the board size and the square sign allows so this point will be randomised for next hit.
                         nextPoint[0] = row - 1; // for row.
@@ -152,7 +152,7 @@ public class AIComputerPlayer {
                 if (col - 1 >= lowBorder + 1) // it will go left just if the board size allows him.
                 {
                     charSquare = rivalBoard.getSquare(row,col-1) ; // takes the sign in the particular square for check.
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     {
                         // if the board size and the square sign allows so this point will be randomised for next hit.
                         nextPoint[0] = row; // for row.
@@ -168,7 +168,7 @@ public class AIComputerPlayer {
                 if (col + 1 <= rivalBoard.getLengthRow()-1) // it will go right just if the board size allows him.
                 {
                     charSquare = rivalBoard.getSquare(row,col+1) ; // takes the sign in the particular square for check.
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     {
                         // if the board size and the square sign allows so this point will be randomised for next hit.
                         nextPoint[0] = row; // for row.
@@ -231,7 +231,7 @@ public class AIComputerPlayer {
                         {
                             i = i + 1; // initializing the variable to next row.
                         }
-                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                         {
                             // if the point stands in all checks so it can be added to array as possible point for random.
                             nextPoint[0] = i+1; // initializing the row.
@@ -257,7 +257,7 @@ public class AIComputerPlayer {
                             j = j - 1; // initializing the variable to next row.
                         }
 
-                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                         {
                              // if the point stands in all checks so it can be added to array as possible point for random.
                             nextPoint[2] = j-1; // initializing the row.
@@ -298,7 +298,7 @@ public class AIComputerPlayer {
                         {
                             i = i + 1; // initializing the variable to next col.
                         }
-                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()  
+                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()  
                         {
                             // if the point stands in all checks so it can be added to array as possible point for random.
                             nextPoint[0] = row; // initializing the row.
@@ -324,7 +324,7 @@ public class AIComputerPlayer {
                             j = j - 1; // initializing the variable to next col.
                         }
 
-                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                        else if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP) //Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                         {
                             // if the point stands in all checks so it can be added to array as possible point for random.
                             nextPoint[2] = row; // initializing the row.
@@ -432,26 +432,26 @@ public class AIComputerPlayer {
         int min_start_col_board = 1;
         for (int i=1; i<this.row_board;i++)
         {
-            for (int j_right=i; j_right<this.col_board; j_right = j_right+size)//îåñéó àú äğ÷åãåú îéîéï ìàìëñåï äøàùé
+            for (int j_right=i; j_right<this.col_board; j_right = j_right+size)//Ã®Ã¥Ã±Ã©Ã³ Ã Ãº Ã¤Ã°Ã·Ã¥Ã£Ã¥Ãº Ã®Ã©Ã®Ã©Ã¯ Ã¬Ã Ã¬Ã«Ã±Ã¥Ã¯ Ã¤Ã¸Ã Ã¹Ã©
             {
-                if(j_right<this.col_board)//áåã÷ àí äğ÷åãä ìà îçåõ ììåç
+                if(j_right<this.col_board)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¬Ã  Ã®Ã§Ã¥Ãµ Ã¬Ã¬Ã¥Ã§
                 {
                     char charSquare = rivalBoard.getSquare(i,j_right) ;
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     {
-                        vector_shootPoint.add(new int[] {i,j_right});//îåñéó ìîòøê ğ÷åãä àôùøé ìéøé
+                        vector_shootPoint.add(new int[] {i,j_right});//Ã®Ã¥Ã±Ã©Ã³ Ã¬Ã®Ã²Ã¸Ãª Ã°Ã·Ã¥Ã£Ã¤ Ã Ã´Ã¹Ã¸Ã© Ã¬Ã©Ã¸Ã©
                     }
                 }
             }
-            for (int j_left=i-size; j_left>=min_start_col_board; j_left = j_left-size)//îåñéó àú äğ÷åãåú ùîàì ìàìëñåï äøàùé
+            for (int j_left=i-size; j_left>=min_start_col_board; j_left = j_left-size)//Ã®Ã¥Ã±Ã©Ã³ Ã Ãº Ã¤Ã°Ã·Ã¥Ã£Ã¥Ãº Ã¹Ã®Ã Ã¬ Ã¬Ã Ã¬Ã«Ã±Ã¥Ã¯ Ã¤Ã¸Ã Ã¹Ã©
             {   //j_left is start from i-size bat, becouse i is alrdey point was add at previous for.
                 //so is the i start(row) is jump left by size.
-                if(j_left>=min_start_col_board)//áåã÷ àí äğ÷åãä ìà îçåõ ììåç
+                if(j_left>=min_start_col_board)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¬Ã  Ã®Ã§Ã¥Ãµ Ã¬Ã¬Ã¥Ã§
                 {                
                     char charSquare = rivalBoard.getSquare(i,j_left) ;
-                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//áåã÷ àí äğ÷åãä äéà ìà éøé "àáåã"-ëìåîø éåøä ø÷ àí æä úà øé÷ àå úà ùîëéì öåììú(äîçùá ìà éåãò àí æä áàîú úà öåììú()
+                    if(charSquare == Constants.EMPTY || charSquare == Constants.BATTLESHIP)//Ã¡Ã¥Ã£Ã· Ã Ã­ Ã¤Ã°Ã·Ã¥Ã£Ã¤ Ã¤Ã©Ã  Ã¬Ã  Ã©Ã¸Ã© "Ã Ã¡Ã¥Ã£"-Ã«Ã¬Ã¥Ã®Ã¸ Ã©Ã¥Ã¸Ã¤ Ã¸Ã· Ã Ã­ Ã¦Ã¤ ÃºÃ  Ã¸Ã©Ã· Ã Ã¥ ÃºÃ  Ã¹Ã®Ã«Ã©Ã¬ Ã¶Ã¥Ã¬Ã¬Ãº(Ã¤Ã®Ã§Ã¹Ã¡ Ã¬Ã  Ã©Ã¥Ã£Ã² Ã Ã­ Ã¦Ã¤ Ã¡Ã Ã®Ãº ÃºÃ  Ã¶Ã¥Ã¬Ã¬Ãº()
                     {
-                        vector_shootPoint.add(new int[] {i,j_left});//îåñéó ìîòøê ğ÷åãä àôùøé ìéøé
+                        vector_shootPoint.add(new int[] {i,j_left});//Ã®Ã¥Ã±Ã©Ã³ Ã¬Ã®Ã²Ã¸Ãª Ã°Ã·Ã¥Ã£Ã¤ Ã Ã´Ã¹Ã¸Ã© Ã¬Ã©Ã¸Ã©
                     }
                 }
             }
